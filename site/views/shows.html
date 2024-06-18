@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventosAqui</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <html data-bs-theme="dark"></html>
+
+    <!-- PLANO DE FUNDO --> 
+    <link rel="stylesheet" href="background.css">
+    <link rel="icon" type="image/png" rel="noopener" target="_blank" href="images/icon.png"> 
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
+     <nav class="navbar navbar-expand-md navbar-dark bg-black">
+        <div class="container position-relative" style="max-width: 90%;">
+
+            <a class="navbar-brand" href="#"><img src="images/icon.png" width="60"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    
+                    <!-- OPÇÕES -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Tela inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./shows.html">Shows</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./galeria.html">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contato.html">Contato</a>
+                    </li>
+                    
+                    <hr style="color: white;">
+                    
+                    <!-- CARRINHO E CALENDÁRIO -->
+                    <li class="nav-item d-md-none">
+                        <a class="nav-link" href="./carrinho.html">Carrinho</a>
+                    </li>
+                    <li class="nav-item d-md-none">
+                        <a class="nav-link" href="./calendario.html">Calendário</a>
+                    </li>
+                    <ul class="navbar-nav position-absolute end-0 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link icones-navbar d-none d-md-block" href="./carrinho.html">
+                                <img src="images/carrinho-de-compras.svg" style="-webkit-filter: invert(1);filter: invert(1);" width="30">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link icones-navbar d-none d-md-block" href="./calendario.html"><img src="images/calendario.svg" style="-webkit-filter: invert(1);filter: invert(1);" width="30"></a>
+                        </li>
+                    </ul> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container-fluid my-5">
+
+        <!-- TÍTULO E DESCRIÇÃO -->
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-8 col-10 text-center text-white">
+                <h1>PRÓXIMOS SHOWS</h1>
+                <p>As portas abrem 90 minutos antes do início do show. 
+                    Capacidade: 850 pessoas. A maioria dos shows são em pé</p>
+            </div>
+
+            <!-- LISTAGEM DE SHOWS -->
+            <div class="col-12 grid mt-4">
+                <%- showsHTML %>     
+            </div>
+        </div>
+    </main>
+    
+    <footer class="container-fluid bg-black">
+       <div class="container text-center text-white fw-light mt-2">
+        <p>&copy 2024 EventosAqui. All rights reserved.</p></div>
+    </footer>
+
+    <script src="bootstrap-5.3.3/js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventosAqui</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <html data-bs-theme="dark"></html>
+
+    <link rel="icon" type="image/png" rel="noopener" target="_blank" href="images/icon.png"> 
+</head>
+<body style="background-color: rgb(11, 8, 25);">
+
+    <!-- CABEÇALHO -->
+     <nav class="navbar navbar-expand-md navbar-dark bg-black">
+        <div class="container position-relative" style="max-width: 90%;">
+
+            <a class="navbar-brand" href="#"><img src="images/icon.png" width="60"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    
+                    <!-- OPÇÕES -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Tela inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./shows.html">Shows</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./galeria.html">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contato.html">Contato</a>
+                    </li>
+                    
+                    <hr style="color: white;">
+                    
+                    <!-- CARRINHO E CALENDÁRIO -->
+                    <li class="nav-item d-md-none">
+                        <a class="nav-link" href="./pagamento.html">Carrinho</a>
+                    </li>
+                    <li class="nav-item d-md-none">
+                        <a class="nav-link" href="./carrinho.html">Calendário</a>
+                    </li>
+                    <ul class="navbar-nav position-absolute end-0 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link icones-navbar d-none d-md-block" href="./carrinho.html">
+                                <img src="images/carrinho-de-compras.svg" style="-webkit-filter: invert(1);filter: invert(1);" width="30">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link icones-navbar d-none d-md-block" href="./calendario.html"
+                                style="background-color: grey;">
+                                <img src="images/calendario.svg" style="-webkit-filter: invert(1);filter: invert(1);" width="30">
+                            </a>
+                        </li>
+                    </ul> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container my-5">
+
+        <!-- TÍTULO E DESCRIÇÃO -->
+        <div class="row justify-content-start">
+            <div class="col-12 text-white">
+                <p class="my-1">MEU EVENTO | 25 de Maio, 18:00 - 26 de Maio, 21:00 Wix, 500 Terry Francois Street, San Francisco CA 94158</p>
+                <h1 class="display-1 fw-bolder">AGENDA</h1>
+            </div>
+
+            <!-- BOTÃO DE COMPRAR INGRESSOS -->
+            <div class="col-12 justify-content-start my-3">
+                <button class="btn" id="compraringressos"
+                    style="border: 1px solid red;
+                        color: red;
+                        border-radius: 0;">
+                    Comprar Ingressos
+                </button>
+            </div>
+
+            <!-- COLUNAS: FILTRAR + TAGS -->
+            <div class="col-sm-3 col-md-3 col-lg-2 col-5 justify-content-start">
+                <p class="fs-3">Filtrar por:</p>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 col-7">
+                <div class="input-group mb-2"> 
+                    <select onChange="filtrar()" class="form-select rounded-0 fs-5 text-white" id="opcoes" 
+                        style="border: none;
+                        background-color: rgb(11, 8, 25);">
+                        <option selected value="Todos">Todos</option>
+                        <option value="Brasilia - DF">Brasília</option>
+                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                        <option value="São Paulo">São Paulo</option>
+                        <option value="Salvador">Salvador</option>
+                    </select>
+                </div>
+            </div>
+
+            <%- eventsHTML %>
+
+            <script>
+                function filtrar() {
+                    const opcoes = document.getElementById('opcoes');
+                    const selecionado = opcoes.options[opcoes.selectedIndex]; 
+
+                    const rowsPrincipais = document.getElementsByClassName('row-principal-agenda');
+                    const rowsSecundarios = document.getElementsByClassName('row-secundario-agenda');
+                    
+                    for (const row of rowsSecundarios) {
+
+                        if (selecionado.innerHTML === "Todos") { 
+                            row.hidden = false;
+                            row.nextElementSibling.hidden = false; 
+                            continue;
+                        }
+                        
+                        if (row.childNodes[1].classList.value === selecionado.value) {
+                            row.hidden = false;
+                            row.nextElementSibling.hidden = false;
+                        } 
+                        else {
+                            row.hidden = true;
+                            row.nextElementSibling.hidden = true;
+                        }
+                    }
+
+                    for (const row of rowsPrincipais) {
+                        const dia = row.innerText.trim().split(' ')[0];    
+                        
+                        row.hidden = true;
+                        row.nextElementSibling.hidden = true;
+                        
+                        for (const row2 of rowsSecundarios) {
+                            const dia2 = row2.children[1].innerText;
+
+                            if ((dia === dia2) && !row2.hidden) { row.hidden = false; row.nextElementSibling.hidden = false; }
+                        }
+                    }
+                }
+                filtrar();
+            </script> 
+        </div>
+
+    </main>
+    
+    <footer class="container-fluid bg-black">
+       <div class="container text-center text-white fw-light mt-2">
+        <p>&copy 2024 EventosAqui. All rights reserved.</p></div>
+    </footer>
+
+    <script src="bootstrap-5.3.3/js/bootstrap.bundle.js"></script>
+</body>
+</html>
